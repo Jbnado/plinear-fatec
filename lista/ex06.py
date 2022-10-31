@@ -6,7 +6,7 @@ T = [
 ]  # Tempos de realização das tarefas
 n = 6  # Operadores
 
-m = len(T)
+m = len(T)  # numero de tarefas
 
 
 begin('tarefas e operadores')
