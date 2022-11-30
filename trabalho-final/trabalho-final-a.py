@@ -32,6 +32,9 @@ def mochila_a(caminho, instancia):
         caminho + instancia)
 
     begin("mochila")
+
+    print("\n*****************************\nArquivo: {}\n".format(instancia))
+
     x = var("x", n, int)  # variável xi (quantidade carregada do item i)
 
     maximize(sum(valor[i] * x[i] for i in range(n)))
@@ -43,24 +46,23 @@ def mochila_a(caminho, instancia):
 
     solve()
 
-    print("{:20s}: {:10}".format(instancia, round(vobj())), end=" ")
+    print("\n\nValor ótimo -> {}".format(round(vobj())))
     for i in range(n):
         if round(x[i].primal) != 0:
-            print("  ({}, {}) ".format(i+1, round(x[i].primal)), end=" ")
+            print("\n(Índice -> {}, Quantidade -> {}) ".format(i +
+                  1, round(x[i].primal)))
 
-    print()
-
-# Instancias = ["inst_20_50.txt",
-#               "inst_20_200.txt",
-#               "inst_50_50.txt",
-#               "inst_50_200.txt",
-#               "inst_200_50.txt",
-#               "inst_200_200.txt",
-#               "inst_1000_50.txt",
-#               "inst_1000_200.txt"]
+    print("")
 
 
-Instancias = ["inst_20_50.txt"]
+Instancias = ["inst_20_50.txt",
+              "inst_20_200.txt",
+              "inst_50_50.txt",
+              "inst_50_200.txt",
+              "inst_200_50.txt",
+              "inst_200_200.txt",
+              "inst_1000_50.txt",
+              "inst_1000_200.txt"]
 
 caminho = "./data/"
 

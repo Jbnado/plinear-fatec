@@ -1,4 +1,7 @@
+from pymprog import *
+
 # leitura dos dados
+
 
 def le_dados(inst):
     with open(inst, "r") as dados:
@@ -31,6 +34,9 @@ def mochila_b(caminho, instancia):
     M = 100000  # M grande
 
     begin("mochila")
+
+    print("\n*****************************\nArquivo: {}\n".format(instancia))
+
     x = var("x", n, int)  # variável da quantidade carregada de cada item
     # variável s para identificar se um item foi ou não carregado
     s = var("s", n, bool)
@@ -38,11 +44,6 @@ def mochila_b(caminho, instancia):
     maximize(sum(valor[i] * x[i] for i in range(n)))
 
     sum(peso[i] * x[i] for i in range(n)) <= capacidade
-
-    '''
-  for i in range(n):
-    x[i] <= quantidade[i]
-  '''
 
     for i in range(n):
         x[i] <= quantidade[i] * s[i]
@@ -52,10 +53,11 @@ def mochila_b(caminho, instancia):
 
     solve()
 
-    print("{:20s}: {:10}".format(instancia, round(vobj())), end=" ")
+    print("\n\nValor ótimo -> {}".format(round(vobj())))
     for i in range(n):
         if round(x[i].primal) != 0:
-            print("  ({}, {}) ".format(i+1, round(x[i].primal)), end=" ")
+            print("\n(Índice -> {}, Quantidade -> {}) ".format(i +
+                  1, round(x[i].primal)))
 
     print()
 
